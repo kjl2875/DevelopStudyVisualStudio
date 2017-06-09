@@ -1,11 +1,19 @@
 #include "node.h"
 #include <stdlib.h>
+#include <assert.h>
 
-struct NODE_LIST *createNode()
+struct NODE_LIST *createNode(const char *message)
 {
 	struct NODE_LIST *newNode = malloc(sizeof(struct NODE_LIST) * 1);
 
-	newNode->data.message = NULL;
+	if (message != NULL)
+	{
+		setNodeData(newNode, message);
+	}
+	else
+	{
+		newNode->data.message = NULL;
+	}
 	newNode->backNode = NULL;
 	newNode->frontNode = NULL;
 
@@ -18,11 +26,11 @@ struct NODE_LIST *insertNodeFront(struct NODE_LIST *targetNodeList, struct NODE_
 	struct NODE_LIST *fNode; // front-node
 	struct NODE_LIST *tNode; // tail-node
 
-							 // PARAMETER NULL CHECK
+	// PARAMETER NULL CHECK
 
 	if (targetNodeList == NULL || frontNodeList == NULL) // Q) 실무에서는 이거 빼도 되지 않나? 함수설명서에 NULL값쓰지 말라고 하는게 전체적으로 효율적일것 같다.
 	{
-		return;
+		assert(0);
 	}
 
 	// 포인터값 보관용으로 저장
@@ -55,11 +63,11 @@ struct NODE_LIST *insertNodeBack(struct NODE_LIST *targetNodeList, struct NODE_L
 	struct NODE_LIST *bNode; // back-node
 	struct NODE_LIST *tNode; // tail-node
 
-							 // PARAMETER NULL CHECK
+	// PARAMETER NULL CHECK
 
 	if (targetNodeList == NULL || backNodeList == NULL) // Q) 실무에서는 이거 빼도 되지 않나? 함수설명서에 NULL값쓰지 말라고 하는게 전체적으로 효율적일것 같다.
 	{
-		return;
+		assert(0);
 	}
 
 	// 포인터값 보관용으로 저장
@@ -131,20 +139,30 @@ void setNodeData(struct NODE_LIST *targetNode, const char *message)
 	{
 		free(targetNode->data.message);
 	}
-
-	targetNode->data.message = malloc(sizeof(char) * (strlen(message) + 2)); // Q) 2bytes문자 재대로 출력하려면 왜 끝에 1byte가 아니라 2bytes공간을 두어야 되는 걸까?
-	strcpy(targetNode->data.message, message);
+	
+	if (message == NULL)
+	{
+		targetNode->data.message = NULL;
+	}
+	else
+	{
+		targetNode->data.message = malloc(sizeof(char) * (strlen(message) + 2)); // Q) 2bytes문자 재대로 출력하려면 왜 끝에 1byte가 아니라 2bytes공간을 두어야 되는 걸까?
+		strcpy(targetNode->data.message, message);
+	}
 }
 
 void delNodeData(struct NODE_LIST *targetNode)
 {
-	// 할당해제하고 NULL로 되돌린다.
+	if (targetNode->data.message != NULL)
+	{
+		// 할당해제하고 NULL로 되돌린다.
 
-	free(targetNode->data.message);
-	targetNode->data.message = NULL;
+		free(targetNode->data.message);
+		targetNode->data.message = NULL;
+	}
 }
 
-struct NODE_LIST *cut(struct NODE_LIST *cutNode)
+struct NODE_LIST *cutNode(struct NODE_LIST *cutNode)
 {
 	// 빠질노드를 감안하여 앞뒤노드 연결을 유지시켜준다.
 
@@ -190,4 +208,44 @@ struct NODE_LIST *getTailNode(struct NODE_LIST *nodeList)
 	}
 
 	return iter;
+}
+
+const char *getNodeData(struct NODE_LIST *targetNode)
+{
+	return targetNode->data.message;
+}
+
+void delNode(struct NODE_LIST *targetNode)
+{
+	cutNode(targetNode);
+	delNodeData(targetNode);
+	free(targetNode);
+}
+
+struct NODE_LIST *delNodeList(struct NODE_LIST *nodeList)
+{
+	struct NODE_LIST *rNode; // return-node
+	struct NODE_LIST *tNode; // target-node
+	struct NODE_LIST *iNode; // iterator-node
+
+	if (nodeList == NULL)  // Q) 실무에서는 이거 빼도 되지 않나? 함수설명서에 NULL값쓰지 말라고 하는게 전체적으로 효율적일것 같다.
+	{
+		assert(0);
+	}
+
+	rNode = nodeList->frontNode;
+
+	if (rNode != NULL)
+	{
+		rNode->backNode = NULL;
+		nodeList->frontNode = NULL;
+	}
+
+	for (iNode = nodeList; iNode != NULL; delNode(tNode))
+	{
+		tNode = iNode;
+		iNode = iNode->backNode;
+	}
+
+	return rNode;
 }
