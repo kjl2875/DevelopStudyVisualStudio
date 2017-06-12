@@ -6,16 +6,14 @@ struct NODE_LIST *createNode(const char *message)
 {
 	struct NODE_LIST *newNode = malloc(sizeof(struct NODE_LIST) * 1);
 
+	newNode->data.message = NULL;
+	newNode->backNode = NULL;
+	newNode->frontNode = NULL;
+
 	if (message != NULL)
 	{
 		setNodeData(newNode, message);
 	}
-	else
-	{
-		newNode->data.message = NULL;
-	}
-	newNode->backNode = NULL;
-	newNode->frontNode = NULL;
 
 	return newNode;
 }
@@ -146,8 +144,8 @@ void setNodeData(struct NODE_LIST *targetNode, const char *message)
 	}
 	else
 	{
-		targetNode->data.message = malloc(sizeof(char) * (strlen(message) + 2)); // Q) 2bytes문자 재대로 출력하려면 왜 끝에 1byte가 아니라 2bytes공간을 두어야 되는 걸까?
-		strcpy(targetNode->data.message, message);
+		targetNode->data.message = malloc(sizeof(char) * (strlen(message)));
+		strcpy(targetNode->data.message, message); 
 	}
 }
 
