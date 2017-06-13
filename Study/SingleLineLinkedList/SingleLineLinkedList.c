@@ -49,8 +49,8 @@ int main(int argc, char *args[])
 
 void doTest2()
 {
-	struct NODE_LIST *nodeList;
-	struct NODE_LIST *pNode;
+	struct NODE *nodeList;
+	struct NODE *pNode;
 	char *data;
 	char buf[255];
 	int i;
@@ -87,7 +87,7 @@ void doTest2()
 
 void doTest()
 {
-	struct NODE_LIST *ls;
+	struct NODE *ls;
 	int cnt;
 	int nodeCount;
 

@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <assert.h>
 
-struct NODE_LIST *createNode(const char *message)
+struct NODE *createNode(const char *message)
 {
-	struct NODE_LIST *newNode = malloc(sizeof(struct NODE_LIST) * 1);
+	struct NODE *newNode = malloc(sizeof(struct NODE) * 1);
 
 	newNode->data.message = NULL;
 	newNode->backNode = NULL;
@@ -18,11 +18,11 @@ struct NODE_LIST *createNode(const char *message)
 	return newNode;
 }
 
-struct NODE_LIST *insertNodeFront(struct NODE_LIST *targetNodeList, struct NODE_LIST *frontNodeList)
+struct NODE *insertNodeFront(struct NODE *targetNodeList, struct NODE *frontNodeList)
 {
-	struct NODE_LIST *rNode; // return-node
-	struct NODE_LIST *fNode; // front-node
-	struct NODE_LIST *tNode; // tail-node
+	struct NODE *rNode; // return-node
+	struct NODE *fNode; // front-node
+	struct NODE *tNode; // tail-node
 
 	// PARAMETER NULL CHECK
 
@@ -55,11 +55,11 @@ struct NODE_LIST *insertNodeFront(struct NODE_LIST *targetNodeList, struct NODE_
 	return rNode;
 }
 
-struct NODE_LIST *insertNodeBack(struct NODE_LIST *targetNodeList, struct NODE_LIST *backNodeList)
+struct NODE *insertNodeBack(struct NODE *targetNodeList, struct NODE *backNodeList)
 {
-	struct NODE_LIST *rNode; // return-node
-	struct NODE_LIST *bNode; // back-node
-	struct NODE_LIST *tNode; // tail-node
+	struct NODE *rNode; // return-node
+	struct NODE *bNode; // back-node
+	struct NODE *tNode; // tail-node
 
 	// PARAMETER NULL CHECK
 
@@ -92,10 +92,10 @@ struct NODE_LIST *insertNodeBack(struct NODE_LIST *targetNodeList, struct NODE_L
 	return rNode;
 }
 
-int getNodeCount(struct NODE_LIST *nodeList)
+int getNodeCount(struct NODE *nodeList)
 {
 	int nCnt; // node-count
-	struct NODE_LIST *pNode; // pointer-node
+	struct NODE *pNode; // pointer-node
 
 	if (nodeList == NULL)
 	{
@@ -129,7 +129,7 @@ int getNodeCount(struct NODE_LIST *nodeList)
 	return nCnt;
 }
 
-void setNodeData(struct NODE_LIST *targetNode, const char *message)
+void setNodeData(struct NODE *targetNode, const char *message)
 {
 	// 메모리할당해서 파라미터값 string copy
 
@@ -149,7 +149,7 @@ void setNodeData(struct NODE_LIST *targetNode, const char *message)
 	}
 }
 
-void delNodeData(struct NODE_LIST *targetNode)
+void delNodeData(struct NODE *targetNode)
 {
 	if (targetNode->data.message != NULL)
 	{
@@ -160,7 +160,7 @@ void delNodeData(struct NODE_LIST *targetNode)
 	}
 }
 
-struct NODE_LIST *cutNode(struct NODE_LIST *cutNode)
+struct NODE *cutNode(struct NODE *cutNode)
 {
 	// 빠질노드를 감안하여 앞뒤노드 연결을 유지시켜준다.
 
@@ -182,9 +182,9 @@ struct NODE_LIST *cutNode(struct NODE_LIST *cutNode)
 	return cutNode;
 }
 
-struct NODE_LIST *getHeadNode(struct NODE_LIST *nodeList)
+struct NODE *getHeadNode(struct NODE *nodeList)
 {
-	struct NODE_LIST *iter; // Q) 성능때문에 nodeList를 그대로 iterator처럼 쓰는게 맞을까? 변수이름 역활때문에 이렇게 새로 만들어서 쓰는게 맞을까?
+	struct NODE *iter; // Q) 성능때문에 nodeList를 그대로 iterator처럼 쓰는게 맞을까? 변수이름 역활때문에 이렇게 새로 만들어서 쓰는게 맞을까?
 	iter = nodeList;
 
 	while (iter->frontNode != NULL)
@@ -195,9 +195,9 @@ struct NODE_LIST *getHeadNode(struct NODE_LIST *nodeList)
 	return iter;
 }
 
-struct NODE_LIST *getTailNode(struct NODE_LIST *nodeList)
+struct NODE *getTailNode(struct NODE *nodeList)
 {
-	struct NODE_LIST *iter; // Q) 성능때문에 nodeList를 그대로 iterator처럼 쓰는게 맞을까? 변수이름 역활때문에 이렇게 새로 만들어서 쓰는게 맞을까?
+	struct NODE *iter; // Q) 성능때문에 nodeList를 그대로 iterator처럼 쓰는게 맞을까? 변수이름 역활때문에 이렇게 새로 만들어서 쓰는게 맞을까?
 	iter = nodeList;
 
 	while (iter->backNode != NULL)
@@ -208,23 +208,23 @@ struct NODE_LIST *getTailNode(struct NODE_LIST *nodeList)
 	return iter;
 }
 
-const char *getNodeData(struct NODE_LIST *targetNode)
+const char *getNodeData(struct NODE *targetNode)
 {
 	return targetNode->data.message;
 }
 
-void delNode(struct NODE_LIST *targetNode)
+void delNode(struct NODE *targetNode)
 {
 	cutNode(targetNode);
 	delNodeData(targetNode);
 	free(targetNode);
 }
 
-struct NODE_LIST *delNodeList(struct NODE_LIST *nodeList)
+struct NODE *delNodeList(struct NODE *nodeList)
 {
-	struct NODE_LIST *rNode; // return-node
-	struct NODE_LIST *tNode; // target-node
-	struct NODE_LIST *iNode; // iterator-node
+	struct NODE *rNode; // return-node
+	struct NODE *tNode; // target-node
+	struct NODE *iNode; // iterator-node
 
 	if (nodeList == NULL)  // Q) 실무에서는 이거 빼도 되지 않나? 함수설명서에 NULL값쓰지 말라고 하는게 전체적으로 효율적일것 같다.
 	{
