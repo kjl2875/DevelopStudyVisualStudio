@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="node.c" />
+    <ClCompile Include="nodedata.c" />
     <ClCompile Include="SingleLineLinkedList.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="node.h" />
+    <ClInclude Include="nodedata.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

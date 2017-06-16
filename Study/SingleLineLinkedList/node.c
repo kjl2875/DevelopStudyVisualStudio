@@ -6,13 +6,13 @@ struct NODE *createNode(const char *message)
 {
 	struct NODE *newNode = malloc(sizeof(struct NODE) * 1);
 
-	newNode->data.message = NULL;
+	newNode->data = NULL;
 	newNode->backNode = NULL;
 	newNode->frontNode = NULL;
 
 	if (message != NULL)
 	{
-		setNodeData(newNode, message);
+		setNodeData(newNode->data, message);
 	}
 
 	return newNode;
@@ -129,37 +129,6 @@ int getNodeCount(struct NODE *nodeList)
 	return nCnt;
 }
 
-void setNodeData(struct NODE *targetNode, const char *message)
-{
-	// 메모리할당해서 파라미터값 string copy
-
-	if (targetNode->data.message != NULL)
-	{
-		free(targetNode->data.message);
-	}
-	
-	if (message == NULL)
-	{
-		targetNode->data.message = NULL;
-	}
-	else
-	{
-		targetNode->data.message = malloc(sizeof(char) * (strlen(message)));
-		strcpy(targetNode->data.message, message); 
-	}
-}
-
-void delNodeData(struct NODE *targetNode)
-{
-	if (targetNode->data.message != NULL)
-	{
-		// 할당해제하고 NULL로 되돌린다.
-
-		free(targetNode->data.message);
-		targetNode->data.message = NULL;
-	}
-}
-
 struct NODE *cutNode(struct NODE *cutNode)
 {
 	// 빠질노드를 감안하여 앞뒤노드 연결을 유지시켜준다.
@@ -206,11 +175,6 @@ struct NODE *getTailNode(struct NODE *nodeList)
 	}
 
 	return iter;
-}
-
-const char *getNodeData(struct NODE *targetNode)
-{
-	return targetNode->data.message;
 }
 
 void delNode(struct NODE *targetNode)
