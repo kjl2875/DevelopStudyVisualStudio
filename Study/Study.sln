@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeyboardInputLayout", "Keyb
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EarnedIncomeTax", "EarnedIncomeTax\EarnedIncomeTax.vcxproj", "{08039064-343E-486D-B09D-3A7A1D274B45}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SequenceNumbers", "SequenceNumbers\SequenceNumbers.vcxproj", "{CA1B7102-CC55-43A9-AC1B-27A6994FA899}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{08039064-343E-486D-B09D-3A7A1D274B45}.Release|x64.Build.0 = Release|x64
 		{08039064-343E-486D-B09D-3A7A1D274B45}.Release|x86.ActiveCfg = Release|Win32
 		{08039064-343E-486D-B09D-3A7A1D274B45}.Release|x86.Build.0 = Release|Win32
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Debug|x64.ActiveCfg = Debug|x64
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Debug|x64.Build.0 = Debug|x64
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Debug|x86.ActiveCfg = Debug|Win32
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Debug|x86.Build.0 = Debug|Win32
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Release|x64.ActiveCfg = Release|x64
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Release|x64.Build.0 = Release|x64
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Release|x86.ActiveCfg = Release|Win32
+		{CA1B7102-CC55-43A9-AC1B-27A6994FA899}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
